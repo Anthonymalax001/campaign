@@ -1,5 +1,11 @@
-node_modules
-server/node_modules
+# dependencies
+node_modules/
+server/node_modules/
+
+# environment variables
 .env
-dist
-build
+server/.env
+
+# builds
+dist/
+build/
