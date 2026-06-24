@@ -9,3 +9,4 @@ server/.env
 # builds
 dist/
 build/
+client_backup/
