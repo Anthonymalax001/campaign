@@ -78,49 +78,88 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-stone-50 text-zinc-950">
-      <section className="relative isolate min-h-[78svh] overflow-hidden bg-zinc-950 text-white sm:min-h-[86vh]">
-        <Image
-          src="/candidate.jpg"
-          alt="Hon. Anthony Malawa"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-45"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,9,11,0.92),rgba(9,9,11,0.72),rgba(9,9,11,0.28))]" />
+      <section className="relative overflow-hidden bg-zinc-950 text-white">
+  <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="grid items-center gap-12 lg:grid-cols-2">
 
-        <div className="relative mx-auto flex min-h-[78svh] max-w-6xl flex-col justify-center px-4 py-12 sm:min-h-[86vh] sm:px-6 sm:py-16 lg:px-8">
-          <div className="max-w-2xl min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300 sm:text-sm sm:tracking-[0.22em]">
-              Kitui Campaign
-            </p>
-            <h1 className="mt-4 break-words text-3xl font-black leading-tight text-white sm:text-5xl md:text-6xl">
-              Hon. Anthony Malawa
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-7 text-zinc-200 sm:text-lg sm:leading-8">
-              Transforming Kitui through organized service, ward-level action, and direct community participation.
-            </p>
+      {/* LEFT SIDE */}
+      <div>
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-emerald-300">
+          Kasarani Constituency 2027
+        </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <button
-                type="button"
-                onClick={() => router.push("/join")}
-                className="w-full rounded-md bg-emerald-400 px-6 py-3 text-sm font-bold text-zinc-950 transition hover:bg-emerald-300 sm:w-auto"
-              >
-                Join Movement
-              </button>
-              <button
-                type="button"
-                onClick={() => router.push("/report")}
-                className="w-full rounded-md border border-white/30 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20 sm:w-auto"
-              >
-                Report Issue
-              </button>
-            </div>
-          </div>
+        <h1 className="mt-4 text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+          Hon. Jeremy Muriira Thiangiti
+        </h1>
+
+        <p className="mt-3 text-xl font-semibold text-emerald-300">
+          J.M. Thiangiti
+        </p>
+
+        <div className="mt-4 inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+          2027 Member of Parliament Aspirant • Kasarani Constituency
         </div>
-      </section>
 
+        <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-300">
+          Leadership That Listens. Development That Delivers.
+          Building a stronger, safer and more prosperous
+          Kasarani for every family.
+        </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <span className="rounded-full bg-white/10 px-4 py-2">
+            Youth Empowerment
+          </span>
+
+          <span className="rounded-full bg-white/10 px-4 py-2">
+            Job Creation
+          </span>
+
+          <span className="rounded-full bg-white/10 px-4 py-2">
+            Better Security
+          </span>
+
+          <span className="rounded-full bg-white/10 px-4 py-2">
+            Infrastructure
+          </span>
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => router.push("/join")}
+            className="rounded-md bg-emerald-400 px-6 py-3 font-bold text-zinc-950 hover:bg-emerald-300"
+          >
+            Join Movement
+          </button>
+
+          <button
+            type="button"
+            onClick={() => router.push("/report")}
+            className="rounded-md border border-white/30 px-6 py-3 font-bold text-white hover:bg-white/10"
+          >
+            Share Community Issue
+          </button>
+        </div>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="flex justify-center lg:justify-end">
+        <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-3 shadow-2xl">
+          <Image
+            src="/jm-thiangiti.jpg"
+            alt="J.M Thiangiti"
+            width={450}
+            height={550}
+            priority
+            className="rounded-2xl object-cover"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
       {error && (
         <div className="mx-auto mt-6 max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
@@ -210,7 +249,7 @@ export default function Home() {
 
       <Section
         eyebrow="Field Moments"
-        title="Rally Gallery"
+        title="Kasarani In Action"
         action={
           galleryLimit < gallery.length ? (
             <LoadMore onClick={() => setGalleryLimit((limit) => limit + 8)} />
@@ -245,7 +284,7 @@ export default function Home() {
       </Section>
 
       <section className="bg-zinc-950 px-4 py-10 text-center text-white sm:px-6 lg:px-8">
-        <h2 className="text-xl font-bold sm:text-2xl">Stand with the campaign</h2>
+        <h2 className="text-xl font-bold sm:text-2xl">Ready to Shape the Future of Kasarani?</h2>
         <div className="mt-5 flex justify-center">
           <button
             type="button"
