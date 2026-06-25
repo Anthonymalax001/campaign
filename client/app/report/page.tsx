@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { type ChangeEvent, useState } from "react";
+const API_BASE = "https://campaign-9kiq.onrender.com";
 
 export default function Report() {
   const [form, setForm] = useState({
@@ -19,7 +20,7 @@ export default function Report() {
   const submit = async () => {
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/issues", form);
+      await axios.post(`${API_BASE}/api/issues`, form);S
       alert("Issue submitted successfully!");
       setForm({ title: "", description: "", ward: "" });
     } catch (err: unknown) {

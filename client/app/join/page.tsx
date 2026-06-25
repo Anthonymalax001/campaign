@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { type ChangeEvent, useState } from "react";
+const API_BASE = "https://campaign-9kiq.onrender.com";
 
 export default function Join() {
   const [form, setForm] = useState({
