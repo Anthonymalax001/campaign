@@ -78,57 +78,81 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-stone-50 text-zinc-950">
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-emerald-100">
-  <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <div className="grid items-center gap-10 lg:grid-cols-2">
+      <section className="relative min-h-screen overflow-hidden">
 
-      {/* LEFT SIDE */}
-      <div>
-        <div className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
+  {/* Background Image */}
+  <Image
+    src="/jm-thiangiti.jpg"
+    alt="J.M Thiangiti"
+    fill
+    priority
+     className="object-cover object-[90%_center]"
+     sizes="100vw"
+  />
+
+  {/* Dark Overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+
+  {/* Left Gradient For Text Visibility */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+
+  {/* Bottom Fade */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+
+  {/* Content */}
+  <div className="relative z-10 flex min-h-screen items-center">
+    <div className="mx-auto w-full max-w-7xl px-6">
+
+      <div className="max-w-2xl">
+
+        <div className="inline-flex rounded-full bg-emerald-600 px-5 py-2 text-sm font-bold uppercase tracking-wider text-white shadow-xl">
           Kasarani Constituency 2027
         </div>
 
-        <h1 className="mt-6 text-4xl font-black leading-tight text-zinc-900 sm:text-5xl lg:text-6xl">
-          Hon. Jeremy Muriira Thiangiti
+        <h1 className="mt-8 text-5xl font-black leading-none text-white drop-shadow-xl md:text-7xl">
+          Hon. Jeremy
+          <br />
+          Muriira Thiangiti
         </h1>
 
-        <p className="mt-3 text-xl font-semibold text-emerald-700">
+        <p className="mt-4 text-2xl font-semibold text-emerald-300">
           J.M. Thiangiti
         </p>
 
-        <div className="mt-4 inline-flex rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm">
-          2027 Member of Parliament Aspirant • Kasarani Constituency
-        </div>
+        <div className="mt-5 h-1.5 w-32 rounded-full bg-emerald-500"></div>
 
-        <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-600">
+        <p className="mt-8 max-w-xl text-lg leading-8 text-zinc-100 md:text-xl">
           Leadership That Listens. Development That Delivers.
           Building a stronger, safer and more prosperous
           Kasarani for every family.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
+        <div className="mt-8 flex flex-wrap gap-3">
+
+          <span className="rounded-full bg-white/10 px-4 py-2 text-sm text-white backdrop-blur">
             Youth Empowerment
           </span>
 
-          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
+          <span className="rounded-full bg-white/10 px-4 py-2 text-sm text-white backdrop-blur">
             Job Creation
           </span>
 
-          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
+          <span className="rounded-full bg-white/10 px-4 py-2 text-sm text-white backdrop-blur">
             Better Security
           </span>
 
-          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
+          <span className="rounded-full bg-white/10 px-4 py-2 text-sm text-white backdrop-blur">
             Infrastructure
           </span>
+
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+
           <button
             type="button"
             onClick={() => router.push("/join")}
-            className="rounded-xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-lg transition hover:bg-emerald-700"
+            className="rounded-2xl bg-emerald-600 px-8 py-4 font-bold text-white shadow-xl transition hover:bg-emerald-700"
           >
             Join Movement
           </button>
@@ -136,32 +160,18 @@ export default function Home() {
           <button
             type="button"
             onClick={() => router.push("/report")}
-            className="rounded-xl border border-zinc-300 bg-white px-6 py-3 font-bold text-zinc-800 transition hover:bg-zinc-50"
+            className="rounded-2xl border border-white/30 bg-white/10 px-8 py-4 font-bold text-white backdrop-blur transition hover:bg-white/20"
           >
-            Share Community Issue
+            Community Issues
           </button>
+
         </div>
-      </div>
 
-      {/* RIGHT SIDE */}
-      <div className="flex justify-center">
-        <div className="relative max-w-md">
-
-          <div className="absolute -inset-6 rounded-full bg-emerald-200 opacity-40 blur-3xl"></div>
-
-          <Image
-            src="/jm-thiangiti.jpg"
-            alt="J.M Thiangiti"
-            width={520}
-            height={650}
-            priority
-            className="relative rounded-3xl object-cover shadow-2xl"
-          />
-        </div>
       </div>
 
     </div>
   </div>
+
 </section>
       {error && (
         <div className="mx-auto mt-6 max-w-6xl px-4 sm:px-6 lg:px-8">
