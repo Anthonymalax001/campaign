@@ -67,7 +67,7 @@ export default function Join() {
             Join the Movement
           </h1>
           <p className="mt-2 text-sm leading-6 text-zinc-400">
-            Support the campaign for change in Kitui.
+            Support the campaign for change in Kasarani.
           </p>
         </div>
 

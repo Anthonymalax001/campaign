@@ -78,48 +78,48 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-stone-50 text-zinc-950">
-      <section className="relative overflow-hidden bg-zinc-950 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-emerald-100">
   <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <div className="grid items-center gap-12 lg:grid-cols-2">
+    <div className="grid items-center gap-10 lg:grid-cols-2">
 
       {/* LEFT SIDE */}
       <div>
-        <p className="text-sm font-bold uppercase tracking-[0.25em] text-emerald-300">
+        <div className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
           Kasarani Constituency 2027
-        </p>
+        </div>
 
-        <h1 className="mt-4 text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 text-4xl font-black leading-tight text-zinc-900 sm:text-5xl lg:text-6xl">
           Hon. Jeremy Muriira Thiangiti
         </h1>
 
-        <p className="mt-3 text-xl font-semibold text-emerald-300">
+        <p className="mt-3 text-xl font-semibold text-emerald-700">
           J.M. Thiangiti
         </p>
 
-        <div className="mt-4 inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+        <div className="mt-4 inline-flex rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm">
           2027 Member of Parliament Aspirant • Kasarani Constituency
         </div>
 
-        <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-300">
+        <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-600">
           Leadership That Listens. Development That Delivers.
           Building a stronger, safer and more prosperous
           Kasarani for every family.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <span className="rounded-full bg-white/10 px-4 py-2">
+          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
             Youth Empowerment
           </span>
 
-          <span className="rounded-full bg-white/10 px-4 py-2">
+          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
             Job Creation
           </span>
 
-          <span className="rounded-full bg-white/10 px-4 py-2">
+          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
             Better Security
           </span>
 
-          <span className="rounded-full bg-white/10 px-4 py-2">
+          <span className="rounded-full bg-white px-4 py-2 shadow-sm">
             Infrastructure
           </span>
         </div>
@@ -128,7 +128,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => router.push("/join")}
-            className="rounded-md bg-emerald-400 px-6 py-3 font-bold text-zinc-950 hover:bg-emerald-300"
+            className="rounded-xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-lg transition hover:bg-emerald-700"
           >
             Join Movement
           </button>
@@ -136,7 +136,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => router.push("/report")}
-            className="rounded-md border border-white/30 px-6 py-3 font-bold text-white hover:bg-white/10"
+            className="rounded-xl border border-zinc-300 bg-white px-6 py-3 font-bold text-zinc-800 transition hover:bg-zinc-50"
           >
             Share Community Issue
           </button>
@@ -144,15 +144,18 @@ export default function Home() {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="flex justify-center lg:justify-end">
-        <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-3 shadow-2xl">
+      <div className="flex justify-center">
+        <div className="relative max-w-md">
+
+          <div className="absolute -inset-6 rounded-full bg-emerald-200 opacity-40 blur-3xl"></div>
+
           <Image
             src="/jm-thiangiti.jpg"
             alt="J.M Thiangiti"
-            width={450}
-            height={550}
+            width={520}
+            height={650}
             priority
-            className="rounded-2xl object-cover"
+            className="relative rounded-3xl object-cover shadow-2xl"
           />
         </div>
       </div>
