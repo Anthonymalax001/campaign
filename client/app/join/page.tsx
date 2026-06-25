@@ -41,7 +41,7 @@ export default function Join() {
     try {
       setLoading(true);
 
-      await axios.post("http://localhost:5000/api/supporters", form);
+      await axios.post(`${API_BASE}/api/supporters`, form);
 
       alert("Welcome to the movement!");
       setForm({ name: "", phone: "", ward: "", category: "" });

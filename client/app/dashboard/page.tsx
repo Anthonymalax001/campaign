@@ -13,7 +13,7 @@ import {
   YAxis
 } from "recharts";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://campaign-9kiq.onrender.com";
 
 type AdminUser = {
   id: number;
