@@ -20,7 +20,7 @@ export default function Report() {
   const submit = async () => {
     try {
       setLoading(true);
-      await axios.post(`${API_BASE}/api/issues`, form);S
+      await axios.post(`${API_BASE}/api/issues`, form);
       alert("Issue submitted successfully!");
       setForm({ title: "", description: "", ward: "" });
     } catch (err: unknown) {
