@@ -1,80 +1,117 @@
 "use client";
-import { useState } from "react";
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+const API_BASE = "http://localhost:5000";
+
+type LoginResponse = {
+  token: string;
+  expiresAt: number;
+  user: {
+    id: number;
+    username: string;
+    role: "staff" | "superadmin";
+  };
+};
+
+const errorMessage = (err: unknown) => {
+  if (axios.isAxiosError(err)) {
+    return err.response?.data?.error || "Login failed";
+  }
+
+  return "Login failed";
+};
 
 export default function Login() {
   const [form, setForm] = useState({
     username: "",
     password: ""
   });
-
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
   const submit = async () => {
+    if (!form.username.trim() || !form.password) {
+      setError("Enter your username and password.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
     try {
-      setLoading(true);
+      const response = await axios.post<LoginResponse>(`${API_BASE}/api/login`, {
+        username: form.username.trim(),
+        password: form.password
+      });
 
-      const res = await axios.post("http://localhost:5000/api/login", form);
+      localStorage.clear();
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token_expiry", response.data.expiresAt.toString());
+      localStorage.setItem("admin", JSON.stringify(response.data.user));
 
-      /* ✅ USE SERVER EXPIRY */
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("token_expiry", res.data.expiresAt.toString());
-
-      /* ✅ SAVE USER */
-      localStorage.setItem("admin", JSON.stringify(res.data.user));
-
-      alert("Login successful");
       router.push("/admin");
-
-    } catch (err: any) {
-      alert(err.response?.data?.error || "Login failed");
+    } catch (err) {
+      setError(errorMessage(err));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-700 to-blue-500 p-4">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm">
+    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-4 py-10 text-zinc-100">
+      <section className="w-full max-w-sm rounded-md border border-zinc-800 bg-zinc-900 p-6 shadow-xl shadow-black/30">
+        <div className="mb-6 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
+            Campaign Command
+          </p>
+          <h1 className="mt-2 text-2xl font-bold text-white">Admin Login</h1>
+        </div>
 
-        <h1 className="text-2xl font-bold mb-2 text-center text-blue-700">
-          Admin Login
-        </h1>
+        {error && (
+          <div className="mb-4 rounded-md border border-rose-500/40 bg-rose-950/40 px-3 py-2 text-sm text-rose-100">
+            {error}
+          </div>
+        )}
 
-        <p className="text-center text-gray-500 mb-4 text-sm">
-          Access campaign dashboard
-        </p>
+        <div className="space-y-4">
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Username</span>
+            <input
+              value={form.username}
+              onChange={(event) => setForm({ ...form, username: event.target.value })}
+              className="field"
+              autoComplete="username"
+            />
+          </label>
 
-        <input
-          name="username"
-          placeholder="Username"
-          onChange={handleChange}
-          className="w-full p-3 mb-3 border rounded-lg"
-        />
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Password</span>
+            <input
+              type="password"
+              value={form.password}
+              onChange={(event) => setForm({ ...form, password: event.target.value })}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") void submit();
+              }}
+              className="field"
+              autoComplete="current-password"
+            />
+          </label>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border rounded-lg"
-        />
-
-        <button
-          onClick={submit}
-          disabled={loading}
-          className="w-full bg-blue-600 text-white p-3 rounded-lg"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-
-      </div>
-    </div>
+          <button
+            type="button"
+            onClick={submit}
+            disabled={loading}
+            className="primary-button w-full disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+
 import axios from "axios";
+import { type ChangeEvent, useState } from "react";
 
 export default function Report() {
   const [form, setForm] = useState({
@@ -11,8 +12,8 @@ export default function Report() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   const submit = async () => {
@@ -21,56 +22,74 @@ export default function Report() {
       await axios.post("http://localhost:5000/api/issues", form);
       alert("Issue submitted successfully!");
       setForm({ title: "", description: "", ward: "" });
-    } catch (err: any) {
-      alert(err.response?.data?.error || "Error submitting issue");
+    } catch (err: unknown) {
+      const message = axios.isAxiosError(err)
+        ? err.response?.data?.error || "Error submitting issue"
+        : "Error submitting issue";
+      alert(message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md">
-        
-        <h1 className="text-2xl font-bold text-center mb-2">
-          Report an Issue
-        </h1>
-        <p className="text-center text-gray-500 mb-6">
-          Tell us what needs to be fixed in your area
-        </p>
+    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-4 py-6 text-zinc-100 sm:py-10">
+      <section className="w-full max-w-md rounded-md border border-zinc-800 bg-zinc-900 p-4 shadow-xl shadow-black/30 sm:p-6">
+        <div className="mb-6 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-300 sm:tracking-[0.22em]">
+            Community Issues
+          </p>
+          <h1 className="mt-2 break-words text-2xl font-bold text-white sm:text-3xl">
+            Report an Issue
+          </h1>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">
+            Tell us what needs attention in your area.
+          </p>
+        </div>
 
-        <input
-          name="title"
-          placeholder="Issue Title"
-          value={form.title}
-          onChange={handleChange}
-          className="w-full p-3 mb-3 border rounded-lg"
-        />
+        <div className="space-y-4">
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Issue Title</span>
+            <input
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              className="field"
+            />
+          </label>
 
-        <textarea
-          name="description"
-          placeholder="Describe the issue"
-          value={form.description}
-          onChange={handleChange}
-          className="w-full p-3 mb-3 border rounded-lg"
-        />
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">
+              Description
+            </span>
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              className="field min-h-36 resize-y"
+            />
+          </label>
 
-        <input
-          name="ward"
-          placeholder="Ward"
-          value={form.ward}
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border rounded-lg"
-        />
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Ward</span>
+            <input
+              name="ward"
+              value={form.ward}
+              onChange={handleChange}
+              className="field"
+            />
+          </label>
 
-        <button
-          onClick={submit}
-          disabled={loading}
-          className="w-full bg-red-600 text-white p-3 rounded-lg"
-        >
-          {loading ? "Submitting..." : "Submit Issue"}
-        </button>
-      </div>
-    </div>
+          <button
+            type="button"
+            onClick={submit}
+            disabled={loading}
+            className="primary-button w-full disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading ? "Submitting..." : "Submit Issue"}
+          </button>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -24,3 +24,148 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  min-height: 2.75rem;
+  overflow-wrap: anywhere;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid #3f3f46;
+  border-radius: 6px;
+  background: #09090b;
+  color: #f4f4f5;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  min-height: 2.75rem;
+  outline: none;
+  padding: 0.625rem 0.75rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.field::placeholder {
+  color: #71717a;
+}
+
+.field:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.18);
+}
+
+select.field {
+  color-scheme: dark;
+}
+
+.file-field {
+  width: 100%;
+  border: 1px solid #3f3f46;
+  border-radius: 6px;
+  background: #09090b;
+  color: #d4d4d8;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  min-height: 2.75rem;
+  outline: none;
+  padding: 0.5rem;
+}
+
+.file-field::file-selector-button {
+  border: 0;
+  border-radius: 5px;
+  background: #27272a;
+  color: #f4f4f5;
+  cursor: pointer;
+  font-weight: 700;
+  margin-right: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.file-field::file-selector-button:hover {
+  background: #3f3f46;
+}
+
+.primary-button,
+.secondary-button,
+.mini-button,
+.danger-button {
+  align-items: center;
+  border-radius: 6px;
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.25rem;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  text-align: center;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.primary-button {
+  background: #22d3ee;
+  color: #09090b;
+}
+
+.primary-button:hover {
+  background: #67e8f9;
+}
+
+.secondary-button {
+  border: 1px solid #52525b;
+  background: transparent;
+  color: #f4f4f5;
+}
+
+.secondary-button:hover {
+  border-color: #22d3ee;
+  color: #a5f3fc;
+}
+
+.mini-button {
+  border: 1px solid #52525b;
+  background: #18181b;
+  color: #f4f4f5;
+  padding: 0.45rem 0.75rem;
+}
+
+.mini-button:hover {
+  border-color: #22d3ee;
+  color: #a5f3fc;
+}
+
+.danger-button {
+  border: 1px solid rgba(244, 63, 94, 0.45);
+  background: rgba(244, 63, 94, 0.1);
+  color: #fecdd3;
+  padding: 0.45rem 0.75rem;
+}
+
+.danger-button:hover {
+  background: rgba(244, 63, 94, 0.2);
+}

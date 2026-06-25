@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+
 import axios from "axios";
+import { type ChangeEvent, useState } from "react";
 
 export default function Join() {
   const [form, setForm] = useState({
@@ -13,10 +14,9 @@ export default function Join() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = event.target;
 
-    // ✅ PHONE: only allow numbers, max 10 digits
     if (name === "phone") {
       if (!/^\d*$/.test(value)) return;
       if (value.length > 10) return;
@@ -28,13 +28,14 @@ export default function Join() {
   const submit = async () => {
     setError("");
 
-    // ✅ VALIDATION
     if (form.phone.length !== 10) {
-      return setError("Phone number must be exactly 10 digits");
+      setError("Phone number must be exactly 10 digits");
+      return;
     }
 
     if (!form.name || !form.ward || !form.category) {
-      return setError("Please fill all fields");
+      setError("Please fill all fields");
+      return;
     }
 
     try {
@@ -44,81 +45,100 @@ export default function Join() {
 
       alert("Welcome to the movement!");
       setForm({ name: "", phone: "", ward: "", category: "" });
-
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Error submitting");
+    } catch (err: unknown) {
+      const message = axios.isAxiosError(err)
+        ? err.response?.data?.error || "Error submitting"
+        : "Error submitting";
+      setError(message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-700 to-blue-500 p-4">
+    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-4 py-6 text-zinc-100 sm:py-10">
+      <section className="w-full max-w-md rounded-md border border-zinc-800 bg-zinc-900 p-4 shadow-xl shadow-black/30 sm:p-6">
+        <div className="mb-6 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300 sm:tracking-[0.22em]">
+            Supporter Registration
+          </p>
+          <h1 className="mt-2 break-words text-2xl font-bold text-white sm:text-3xl">
+            Join the Movement
+          </h1>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">
+            Support the campaign for change in Kitui.
+          </p>
+        </div>
 
-      <div className="bg-white shadow-xl rounded-2xl p-6 w-full max-w-md">
-
-        <h1 className="text-2xl font-bold text-center mb-2 text-blue-700">
-          Join the Movement
-        </h1>
-
-        <p className="text-center text-gray-500 mb-6 text-sm">
-          Support the campaign for change in Kitui
-        </p>
-
-        {/* ERROR */}
         {error && (
-          <div className="bg-red-100 text-red-600 p-2 rounded mb-3 text-sm">
+          <div className="mb-4 rounded-md border border-rose-500/40 bg-rose-950/40 px-3 py-2 text-sm text-rose-100">
             {error}
           </div>
         )}
 
-        <input
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full p-3 mb-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-        />
+        <div className="space-y-4">
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Full Name</span>
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              className="field"
+              autoComplete="name"
+            />
+          </label>
 
-        <input
-          name="phone"
-          placeholder="Phone (10 digits)"
-          value={form.phone}
-          onChange={handleChange}
-          maxLength={10}
-          className="w-full p-3 mb-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-        />
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">
+              Phone (10 digits)
+            </span>
+            <input
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              inputMode="numeric"
+              maxLength={10}
+              className="field"
+              autoComplete="tel"
+            />
+          </label>
 
-        <input
-          name="ward"
-          placeholder="Ward"
-          value={form.ward}
-          onChange={handleChange}
-          className="w-full p-3 mb-3 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-        />
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Ward</span>
+            <input
+              name="ward"
+              value={form.ward}
+              onChange={handleChange}
+              className="field"
+            />
+          </label>
 
-        <select
-          name="category"
-          value={form.category}
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-        >
-          <option value="">Select Category</option>
-          <option value="youth">Youth</option>
-          <option value="farmer">Farmer</option>
-          <option value="business">Business</option>
-          <option value="other">Other</option>
-        </select>
+          <label className="block">
+            <span className="mb-2 block text-sm font-medium text-zinc-300">Category</span>
+            <select
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              className="field"
+            >
+              <option value="">Select Category</option>
+              <option value="youth">Youth</option>
+              <option value="farmer">Farmer</option>
+              <option value="business">Business</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
 
-        <button
-          onClick={submit}
-          disabled={loading}
-          className="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-        >
-          {loading ? "Submitting..." : "Join Now"}
-        </button>
-
-      </div>
-    </div>
+          <button
+            type="button"
+            onClick={submit}
+            disabled={loading}
+            className="primary-button w-full disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading ? "Submitting..." : "Join Now"}
+          </button>
+        </div>
+      </section>
+    </main>
   );
 }
